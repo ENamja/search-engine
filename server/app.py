@@ -1,10 +1,17 @@
 from flask import Flask, jsonify, request
 from flask_cors import CORS
+from dotenv import load_dotenv
 import search
+import os
+
+load_dotenv()
 
 # app instance
 app = Flask(__name__)
 CORS(app)
+
+# Get the environment variables
+app.config['DEBUG'] = os.environ.get('FLASK_DEBUG')
 
 @app.route("/search", methods=["GET"])
 def return_home():
@@ -24,4 +31,4 @@ def return_home():
     })
 
 if __name__ == "__main__":
-    app.run(debug=True, port=8000)
+    app.run()
